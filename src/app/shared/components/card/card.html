@@ -1,0 +1,26 @@
+<article class="card">
+  <img [src]="resource.imageUrl" [alt]="resource.title" class="card-image">
+  
+  <div class="card-content">
+    <span class="badge">{{ resource.type | uppercase }}</span>
+    <h3>{{ resource.title }}</h3>
+    <p class="description">{{ resource.description }}</p>
+    
+    <div class="tags">
+      @for (tag of resource.tags; track tag) {
+        <span class="tag">#{{ tag }}</span>
+      }
+    </div>
+
+    <div class="card-footer">
+      <div class="author">
+        <img [src]="resource.author.avatarUrl" alt="Avatar" class="avatar">
+        <div>
+          <span class="author-name">{{ resource.author.name }}</span>
+          <span class="date">{{ resource.createdAt | date:'dd.MM.yyyy' }}</span>
+        </div>
+      </div>
+      <strong class="price">{{ resource.price | currency:'USD' }}</strong>
+    </div>
+  </div>
+</article>
