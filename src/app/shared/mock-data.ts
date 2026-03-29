@@ -10,6 +10,7 @@ export const WEB_RESOURCES: WebResource[] = [
     createdAt: new Date('2025-10-15'),
     type: ResourceType.Template,
     tags: ['Angular 19', 'Tailwind', 'Chart.js'],
+    isTrending: true,
     author: { name: 'Oleksandr Melnyk', avatarUrl: 'https://placehold.co/50x50/3498db/FFF?text=JD' }
   },
   {
@@ -32,7 +33,6 @@ export const WEB_RESOURCES: WebResource[] = [
     createdAt: new Date('2025-03-05'),
     type: ResourceType.UIKit,
     tags: ['Figma', 'UI/UX', 'Design System'],
-    author: { name: 'DevSpace Team', avatarUrl: 'https://placehold.co/50x50/f1c40f/000?text=DS' }
   },
   {
     id: '4',
@@ -43,6 +43,7 @@ export const WEB_RESOURCES: WebResource[] = [
     createdAt: new Date('2025-11-30'),
     type: ResourceType.Plugin,
     tags: ['SEO', 'Performance', 'JavaScript'],
+    isTrending: true,
     author: { name: 'Dmytro Bondarenko', avatarUrl: 'https://placehold.co/50x50/e67e22/FFF?text=AW' }
   },
   {

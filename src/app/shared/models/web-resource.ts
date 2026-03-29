@@ -19,5 +19,6 @@ export interface WebResource {
   createdAt: Date;
   type: ResourceType;
   tags: string[];
-  author: Author;
+  author?: Author;
+  isTrending?: boolean;
 }
