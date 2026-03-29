@@ -1,26 +1,42 @@
-<article class="card">
-  <img [src]="resource.imageUrl" [alt]="resource.title" class="card-image">
+<article class="card" [class.premium-card]="resource.price > 50">
+  
+  <div class="image-wrapper">
+    <img [src]="resource.imageUrl" [alt]="resource.title" class="card-image">
+    
+    @if (resource.isTrending) {
+      <span class="trending-badge">Топ 🔥</span>
+    }
+  </div>
   
   <div class="card-content">
-    <span class="badge">{{ resource.type | uppercase }}</span>
+    
+    @switch (resource.type) {
+      @case (ResourceType.Template) { <span class="badge template-badge">Шаблон 🎨</span> }
+      @case (ResourceType.Plugin)   { <span class="badge plugin-badge">Плагін ⚙️</span> }
+      @case (ResourceType.Course)   { <span class="badge course-badge">Курс 📚</span> }
+      @default                      { <span class="badge default-badge">{{ resource.type }}</span> }
+    }
+
     <h3>{{ resource.title }}</h3>
     <p class="description">{{ resource.description }}</p>
-    
-    <div class="tags">
-      @for (tag of resource.tags; track tag) {
-        <span class="tag">#{{ tag }}</span>
-      }
-    </div>
 
     <div class="card-footer">
       <div class="author">
-        <img [src]="resource.author.avatarUrl" alt="Avatar" class="avatar">
+        <img [src]="resource.author?.avatarUrl" alt="Avatar" class="avatar">
         <div>
-          <span class="author-name">{{ resource.author.name }}</span>
+          <span class="author-name">{{ resource.author?.name || 'DevSpace Team' }}</span>
           <span class="date">{{ resource.createdAt | date:'dd.MM.yyyy' }}</span>
         </div>
       </div>
       <strong class="price">{{ resource.price | currency:'USD' }}</strong>
+    </div>
+
+    <div class="actions">
+      @if (resource.price === 0) {
+        <button class="btn btn-free" (click)="onBtnClick()">Завантажити безкоштовно</button>
+      } @else {
+        <button class="btn btn-buy" (click)="onBtnClick()">Додати в кошик</button>
+      }
     </div>
   </div>
 </article>

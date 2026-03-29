@@ -100,3 +100,53 @@
   font-size: 1.2rem;
   color: var(--accent-color, #4CAF50);
 }
+
+.premium-card {
+  border: 2px solid #f1c40f;
+  box-shadow: 0 0 15px rgba(241, 196, 15, 0.2);
+}
+
+.template-badge { background-color: #3498db; }
+.plugin-badge { background-color: #e67e22; }
+.course-badge { background-color: #9b59b6; }
+.default-badge { background-color: #7f8c8d; }
+
+.image-wrapper {
+  position: relative;
+}
+
+.trending-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #e74c3c;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.8rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.actions {
+  margin-top: 15px;
+  display: flex;
+}
+
+.btn {
+  flex-grow: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn:hover { opacity: 0.8; }
+.btn-free { background-color: #27ae60; color: white; }
+.btn-buy { background-color: var(--primary-color); color: white; }
+
+.avatar:not([src]) {
+  background-color: #555;
+}

@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { WebResource } from '../../models/web-resource';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { WebResource, ResourceType } from '../../models/web-resource';
 import { CurrencyPipe, DatePipe, UpperCasePipe } from '@angular/common'; 
 
 @Component({
@@ -10,5 +10,13 @@ import { CurrencyPipe, DatePipe, UpperCasePipe } from '@angular/common';
   styleUrls: ['./card.css']
 })
 export class CardComponent {
-  @Input({ required: true }) resource!: WebResource; 
+  @Input({ required: true }) resource!: WebResource;
+  
+  @Output() actionClick = new EventEmitter<string>();
+
+  public ResourceType = ResourceType;
+
+  onBtnClick() {
+    this.actionClick.emit(this.resource.id);
+  }
 }
