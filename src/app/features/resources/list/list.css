@@ -1,0 +1,23 @@
+.resources-container {
+  padding: 20px;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  color: var(--text-color, #d4d4d4);
+  font-size: 1.8rem;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.empty-message {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+  color: #888;
+}

@@ -1,0 +1,11 @@
+<section class="resources-container">
+  <h2>Каталог ресурсів розробника</h2>
+  
+  <div class="grid-layout">
+    @for (item of resourcesList; track item.id) {
+      <dev-card [resource]="item"></dev-card>
+    } @empty {
+      <p class="empty-message">На жаль, ресурсів не знайдено.</p>
+    }
+  </div>
+</section>
