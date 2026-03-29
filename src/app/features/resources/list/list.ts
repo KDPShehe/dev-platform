@@ -12,4 +12,9 @@ import { WEB_RESOURCES } from '../../../shared/mock-data';
 })
 export class ListComponent {
   resourcesList: WebResource[] = WEB_RESOURCES;
+
+  handleCardAction(id: string) {
+    console.log(`[DevSpace Action] Користувач натиснув кнопку на ресурсі з ID: ${id}`);
+    alert(`Ресурс з ID: ${id} успішно оброблено! (Перевір консоль)`);
+  }
 }

@@ -3,7 +3,12 @@
   
   <div class="grid-layout">
     @for (item of resourcesList; track item.id) {
-      <dev-card [resource]="item"></dev-card>
+      
+      <dev-card 
+        [resource]="item" 
+        (actionClick)="handleCardAction($event)">
+      </dev-card>
+      
     } @empty {
       <p class="empty-message">На жаль, ресурсів не знайдено.</p>
     }
