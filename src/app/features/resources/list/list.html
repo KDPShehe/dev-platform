@@ -1,16 +1,42 @@
 <section class="resources-container">
   <h2>Каталог ресурсів розробника</h2>
   
-  <div class="grid-layout">
-    @for (item of resourcesList; track item.id) {
+  <div class="filters-panel">
+    
+    <input 
+      type="text" 
+      #searchInput 
+      [(ngModel)]="searchQuery" 
+      (ngModelChange)="filterItems()" 
+      placeholder="Пошук за назвою..."
+      class="filter-input">
       
+    <select [(ngModel)]="selectedCategory" (ngModelChange)="filterItems()" class="filter-select">
+      <option value="All">Всі категорії</option>
+      @for (type of resourceTypes; track type) {
+        <option [value]="type">{{ type }}</option>
+      }
+    </select>
+
+    <button class="btn-reset" (click)="resetFilters(searchInput)">
+      Очистити фільтри
+    </button>
+    
+  </div>
+
+  <p class="debug-info">Ви шукаєте: <strong>{{ searchQuery || 'Нічого' }}</strong></p>
+
+  <div class="grid-layout">
+    @for (item of filteredResources; track item.id) {
       <dev-card 
         [resource]="item" 
         (actionClick)="handleCardAction($event)">
       </dev-card>
-      
     } @empty {
-      <p class="empty-message">На жаль, ресурсів не знайдено.</p>
+      <div class="empty-message">
+        <p>На жаль, за вашим запитом нічого не знайдено.</p>
+        <button class="btn-reset" (click)="resetFilters(searchInput)">Скинути пошук</button>
+      </div>
     }
   </div>
 </section>
