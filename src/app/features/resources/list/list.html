@@ -26,8 +26,10 @@
 
   <p class="debug-info">Ви шукаєте: <strong>{{ searchQuery || 'Нічого' }}</strong></p>
 
+  @if (resources$ | async; as resources) {
+  
   <div class="grid-layout">
-    @for (item of filteredResources; track item.id) {
+    @for (item of resources; track item.id) {
       <dev-card 
         [resource]="item" 
         (actionClick)="handleCardAction($event)">
@@ -39,4 +41,11 @@
       </div>
     }
   </div>
+
+} @else {
+  <div class="loading-container">
+    <div class="spinner"></div>
+    <p>Завантаження ресурсів...</p>
+  </div>
+}
 </section>
