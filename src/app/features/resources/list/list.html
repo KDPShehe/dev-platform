@@ -35,11 +35,16 @@
         (actionClick)="handleCardAction($event)">
       </dev-card>
     } @empty {
-      <div class="empty-message">
-        <p>На жаль, за вашим запитом нічого не знайдено.</p>
-        <button class="btn-reset" (click)="resetFilters(searchInput)">Скинути пошук</button>
+      
+      <div class="not-found">
+        <h2>Нічого не знайдено 🕵️‍♂️</h2>
+        <p>На жаль, за вашим запитом <strong>{{ searchQuery ? '"' + searchQuery + '"' : '' }}</strong> немає результатів. Спробуйте змінити фільтри.</p>
+        
+        <button class="btn-reset" style="margin-top: 15px;" (click)="resetFilters(searchInput)">
+          Скинути пошук
+        </button>
       </div>
-    }
+      }
   </div>
 
 } @else {
