@@ -1,11 +1,13 @@
-import { Directive, ElementRef, HostListener, Renderer2, OnInit } from '@angular/core';
+import { Directive, ElementRef, HostListener, Renderer2, OnInit, Input } from '@angular/core';
 
 @Directive({
   selector: '[appHighlight]',
   standalone: true
 })
 export class HighlightDirective implements OnInit {
-  
+
+  @Input('appHighlight') highlightColor: string = ''; 
+
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit() {

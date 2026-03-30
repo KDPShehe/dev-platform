@@ -1,0 +1,61 @@
+<div class="form-container">
+  <h2>Додати новий ресурс</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    
+    <div class="form-group">
+      <label for="title">Назва ресурсу</label>
+      <input id="title" type="text" formControlName="title" placeholder="Введіть назву...">
+      
+      @if (controls.title.invalid && controls.title.touched) {
+        <div class="error-messages">
+          @if (controls.title.errors?.['required']) { <small>Поле обов'язкове.</small> }
+          @if (controls.title.errors?.['minlength']) { <small>Мінімум 3 символи.</small> }
+          @if (controls.title.errors?.['forbiddenName']) { <small>Слово "test" заборонено!</small> }
+        </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="type">Категорія</label>
+      <select id="type" formControlName="type">
+        @for (type of resourceTypes; track type) {
+          <option [value]="type">{{ type }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="price">Ціна ($)</label>
+      <input id="price" type="number" formControlName="price">
+      
+      @if (controls.price.invalid && controls.price.touched) {
+        <div class="error-messages">
+          @if (controls.price.errors?.['min']) { <small>Ціна не може бути від'ємною.</small> }
+        </div>
+      }
+    </div>
+
+    <div class="form-group">
+        <label>Опис ресурсу</label>
+        <textarea formControlName="description" placeholder="Розкажіть детальніше..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="imageUrl">URL Зображення</label>
+      <input id="imageUrl" type="text" formControlName="imageUrl" placeholder="https://...">
+      
+      @if (controls.imageUrl.invalid && controls.imageUrl.touched) {
+        <div class="error-messages">
+          @if (controls.imageUrl.errors?.['pattern']) { <small>Введіть коректне посилання (http/https).</small> }
+        </div>
+      }
+    </div>
+
+    <div class="form-actions">
+      <a routerLink="/" class="btn btn-secondary">Скасувати</a>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Зберегти</button>
+    </div>
+
+  </form>
+</div>

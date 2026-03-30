@@ -4,12 +4,13 @@ import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { CardComponent } from '../../../shared/components/card/card'; 
 import { WebResource, ResourceType } from '../../../shared/models/web-resource';
-import { ResourceService } from '../../../shared/services/resource'; 
+import { ResourceService } from '../../../shared/services/resource';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'dev-list',
   standalone: true,
-  imports: [CardComponent, FormsModule, CommonModule],
+  imports: [RouterLink, CardComponent, FormsModule, CommonModule],
   templateUrl: './list.html',
   styleUrls: ['./list.css']
 })

@@ -59,4 +59,13 @@ export class ResourceService {
     const resource = this.allItems.find(item => item.id === id);
     return of(resource).pipe(delay(1000));
   }
+  addItem(newItem: WebResource): void {
+    const currentItems = this.itemsSubject$.getValue() || [];
+
+    const updatedItems = [newItem, ...currentItems];
+
+    this.allItems = [newItem, ...this.allItems];
+
+    this.itemsSubject$.next(updatedItems);
+  }
 }
