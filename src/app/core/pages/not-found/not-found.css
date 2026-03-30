@@ -1,0 +1,50 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  text-align: center;
+}
+
+.page-404 {
+  padding: 40px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.page-404 h1 {
+  font-size: 8rem;
+  margin: 0;
+  color: #0ea5e9;
+  text-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+  line-height: 1;
+}
+
+.page-404 p {
+  font-size: 1.5rem;
+  color: #e2e8f0;
+  margin: 20px 0 30px;
+}
+
+.btn-home {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #0ea5e9;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-home:hover {
+  background-color: #0284c7;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

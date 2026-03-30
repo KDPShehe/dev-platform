@@ -1,0 +1,50 @@
+<div class="details-container">
+  <a routerLink="/resources" class="back-btn">← Назад до каталогу</a>
+
+  @if (resource$ | async; as product) {
+    <article class="product-details">
+      <img [src]="product.imageUrl" [alt]="product.title" class="main-image">
+      
+      <div class="info-section">
+        <div class="badges">
+          @switch (product.type) {
+            @case (ResourceType.Template) { <span class="badge template-badge">Шаблон 🎨</span> }
+            @case (ResourceType.Plugin)   { <span class="badge plugin-badge">Плагін ⚙️</span> }
+            @case (ResourceType.Course)   { <span class="badge course-badge">Курс 📚</span> }
+            @default                      { <span class="badge default-badge">{{ product.type }}</span> }
+          }
+          @if (product.isTrending) { <span class="badge trending-badge">Топ 🔥</span> }
+        </div>
+
+        <h1>{{ product.title }}</h1>
+        <p class="description">{{ product.description }}</p>
+        <div class="meta-info">
+          <span class="price">{{ product.price | currency:'USD' }}</span>
+          <span class="date">Додано: {{ product.createdAt | date:'dd.MM.yyyy' }}</span>
+        </div>
+
+        <div class="tags-list">
+          <h3>Технології:</h3>
+          <ul>
+            @for (tag of product.tags; track tag) {
+              <li>#{{ tag }}</li>
+            }
+          </ul>
+        </div>
+
+        <div class="author-details">
+          <h3>Автор:</h3>
+          <div class="author-card">
+            <img [src]="product.author?.avatarUrl" alt="Avatar" class="avatar">
+            <p>{{ product.author?.name || 'DevSpace Team' }}</p>
+          </div>
+        </div>
+      </div>
+    </article>
+  } @else {
+    <div class="loading-container">
+      <div class="spinner"></div>
+      <p>Завантаження інформації про ресурс...</p>
+    </div>
+  }
+</div>
