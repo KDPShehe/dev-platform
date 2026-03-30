@@ -1,32 +1,52 @@
 import { Injectable } from '@angular/core';
-import { WebResource, ResourceType } from '../models/web-resource';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { delay, debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { WebResource } from '../models/web-resource';
+import { FilterOptions } from '../models/filter-options';
 import { WEB_RESOURCES } from '../mock-data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResourceService {
-  private items: WebResource[] = [...WEB_RESOURCES];
+  private allItems: WebResource[] = [...WEB_RESOURCES];
 
-  getAll(): WebResource[] {
-    return [...this.items];
+  private itemsSubject$ = new BehaviorSubject<WebResource[] | null>(null);
+  public items$ = this.itemsSubject$.asObservable();
+
+  private filterSubject$ = new BehaviorSubject<FilterOptions>({
+    query: '',
+    category: 'All'
+  });
+
+  constructor() {
+    of(this.allItems).pipe(delay(1000)).subscribe(data => {
+      this.filterSubject$.next(this.filterSubject$.getValue());
+    });
+
+    this.filterSubject$.pipe(
+      debounceTime(500),
+      distinctUntilChanged((prev, curr) => JSON.stringify(prev) === JSON.stringify(curr)),
+      map(options => {
+        if (!this.allItems.length) return null;
+
+        return this.allItems.filter(item => {
+          const matchesQuery = item.title.toLowerCase().includes(options.query.toLowerCase());
+          const matchesCategory = options.category === 'All' || item.type === options.category;
+          return matchesQuery && matchesCategory;
+        });
+      })
+    ).subscribe(filteredResult => {
+      this.itemsSubject$.next(filteredResult);
+    });
   }
 
-  getById(id: string): WebResource | undefined {
-    return this.items.find(item => item.id === id);
+  updateFilters(options: FilterOptions): void {
+    this.filterSubject$.next(options);
   }
 
   deleteItem(id: string): void {
-    this.items = this.items.filter(item => item.id !== id);
-  }
-
-  filterResources(query: string, category: ResourceType | 'All'): WebResource[] {
-    const lowerQuery = query.toLowerCase().trim();
-    
-    return this.items.filter(item => {
-      const matchesSearch = item.title.toLowerCase().includes(lowerQuery);
-      const matchesCategory = category === 'All' || item.type === category;
-      return matchesSearch && matchesCategory;
-    });
+    this.allItems = this.allItems.filter(item => item.id !== id);
+    this.filterSubject$.next(this.filterSubject$.getValue());
   }
 }
