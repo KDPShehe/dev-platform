@@ -47,6 +47,16 @@ export class ResourceService {
 
   deleteItem(id: string): void {
     this.allItems = this.allItems.filter(item => item.id !== id);
-    this.filterSubject$.next(this.filterSubject$.getValue());
+
+    const currentDisplayedItems = this.itemsSubject$.getValue();
+    
+    if (currentDisplayedItems) {
+      const updatedItems = currentDisplayedItems.filter(item => item.id !== id);
+      this.itemsSubject$.next(updatedItems);
+    }
+  }
+  getById(id: string): Observable<WebResource | undefined> {
+    const resource = this.allItems.find(item => item.id === id);
+    return of(resource).pipe(delay(1000));
   }
 }
