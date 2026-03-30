@@ -20,6 +20,14 @@
     <h3>{{ resource.title }}</h3>
     <p class="description">{{ resource.description }}</p>
 
+    <details class="resource-details">
+      <summary>Детальна інформація</summary>
+      <div class="details-content">
+        <p><strong>Додано:</strong> {{ resource.createdAt | date:'dd.MM.yyyy' }}</p>
+        <p><strong>Тип ресурсу:</strong> {{ resource.type }}</p>
+        </div>
+    </details>
+
     <div class="card-footer">
       <div class="author">
         <img [src]="resource.author?.avatarUrl" alt="Avatar" class="avatar">

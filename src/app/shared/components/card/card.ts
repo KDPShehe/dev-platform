@@ -1,11 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { WebResource, ResourceType } from '../../models/web-resource';
-import { CurrencyPipe, DatePipe, UpperCasePipe } from '@angular/common'; 
+import { CurrencyPipe, DatePipe} from '@angular/common';
 
 @Component({
   selector: 'dev-card',
   standalone: true,
-  imports: [CurrencyPipe, DatePipe, UpperCasePipe],
+  imports: [CurrencyPipe, DatePipe],
   templateUrl: './card.html',
   styleUrls: ['./card.css']
 })
