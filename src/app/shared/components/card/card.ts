@@ -1,11 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { WebResource, ResourceType } from '../../models/web-resource';
+import { TruncatePipe } from '../../pipes/truncate-pipe';
 import { CurrencyPipe, DatePipe} from '@angular/common';
+import { CategoryColorPipe } from '../../pipes/category-color-pipe';
+import { HighlightDirective } from '../../directives/highlight';
 
 @Component({
   selector: 'dev-card',
   standalone: true,
-  imports: [CurrencyPipe, DatePipe],
+  imports: [CurrencyPipe, DatePipe, TruncatePipe, CategoryColorPipe, HighlightDirective],
   templateUrl: './card.html',
   styleUrls: ['./card.css']
 })

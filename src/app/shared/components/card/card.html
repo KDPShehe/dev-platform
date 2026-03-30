@@ -1,4 +1,4 @@
-<article class="card" [class.premium-card]="resource.price > 50">
+<article class="card" [appHighlight]="'#f8fafc'">
   
   <div class="image-wrapper">
     <img [src]="resource.imageUrl" [alt]="resource.title" class="card-image">
@@ -10,15 +10,14 @@
   
   <div class="card-content">
     
-    @switch (resource.type) {
-      @case (ResourceType.Template) { <span class="badge template-badge">Шаблон 🎨</span> }
-      @case (ResourceType.Plugin)   { <span class="badge plugin-badge">Плагін ⚙️</span> }
-      @case (ResourceType.Course)   { <span class="badge course-badge">Курс 📚</span> }
-      @default                      { <span class="badge default-badge">{{ resource.type }}</span> }
-    }
+    <span class="badge" 
+      [style.backgroundColor]="resource.type | categoryColor"
+      style="color: #ffffff; padding: 4px 8px; border-radius: 4px;">
+      {{ resource.type }}
+    </span>
 
     <h3>{{ resource.title }}</h3>
-    <p class="description">{{ resource.description }}</p>
+    <p class="description">{{ resource.description | truncate:60 }}</p>
 
     <details class="resource-details">
       <summary>Детальна інформація</summary>
